@@ -246,7 +246,7 @@ wk.add({
 	{ "<leader>P", '"xP', desc = "Paste deleted before", icon = "" },
 	-- { "<leader>Q", "<cmd>:qa<CR>", desc = "[q]uit" },
 	-- { "<leader>!", "<cmd>:qa<CR>", desc = "Quit neovim" },
-	{ "<leader>h", "<cmd>:noh<CR>", desc = "No highlight", icon = "" },
+	{ "<leader>/h", "<cmd>:noh<CR>", desc = "No highlight", icon = "" },
 	{
 		"<leader><Space>",
 		function()
@@ -353,14 +353,14 @@ wk.add({
 -- General
 wk.add({
 	{ "<leader>/", group = "General", icon = "󰋜" },
-	{
-		"<leader>/-",
-		function()
-			require("oil").toggle_float()
-		end,
-		desc = "Oil",
-		icon = "",
-	},
+	-- {
+	-- 	"<leader>/-",
+	-- 	function()
+	-- 		require("oil").toggle_float()
+	-- 	end,
+	-- 	desc = "Oil",
+	-- 	icon = "",
+	-- },
 	{ "<leader>/c", "<cmd>ColorizerToggle<CR>", desc = "Colorizer" },
 	{
 		"<leader>/n",
@@ -567,130 +567,18 @@ wk.add({
 -- GIT
 wk.add({
 	{ "<leader>g", group = "Git" },
-
-	{ "<leader>g/", "<cmd>:!git rev-parse --show-toplevel<CR>", desc = "No highlight", icon = "" },
-	{ "<leader>g#", "<cmd>:Git blame<CR>", desc = "Blame list" },
-	{ "<leader>g?", "<cmd>:Git<CR>", desc = "Status" },
-	{
-		"<leader>g-",
-		function()
-			package.loaded.gitsigns.toggle_deleted()
-		end,
-		desc = "Toggle deleted",
-	},
-
-	{ "<leader>gS", "<cmd>:Git add .", desc = "Stage all" },
-	{
-		"<leader>gs",
-		function()
-			package.loaded.gitsigns.stage_buffer()
-		end,
-		desc = "Stage buffer",
-	},
-	{
-		"<leader>gb",
-		function()
-			package.loaded.gitsigns.blame_line({ full = true })
-		end,
-		desc = "Blame",
-	},
-	{
-		"<leader>gB",
-		function()
-			package.loaded.gitsigns.toggle_current_line_blame()
-		end,
-		desc = "Blame line",
-	},
-	{ "<leader>gx", "<cmd>:GBrowse<CR>", desc = "Github" },
-	{ "<leader>gc", "<cmd>:Git commit<CR>", desc = "Commit" },
-	{
-		"<leader>dd",
-		function()
-			package.loaded.gitsigns.diffthis()
-		end,
-		desc = "Diff buffer",
-	},
-	{
-		"<leader>gD",
-		function()
-			package.loaded.gitsigns.diffthis("~")
-		end,
-		desc = "Diff to last commit",
-	},
-	{ "<leader>gh", name = "Hunk" },
-	{
-		"<leader>ghh",
-		function()
-			package.loaded.gitsigns.stage_hunk()
-		end,
-		desc = "Hunk stage",
-	},
-	{
-		"<leader>ghu",
-		function()
-			package.loaded.gitsigns.undo_stage_hunk()
-		end,
-		desc = "Hunk undo stage",
-	},
-	{
-		"<leader>ghr",
-		function()
-			package.loaded.gitsigns.reset_hunk()
-		end,
-		desc = "Hunk reset",
-	},
-	{
-		"<leader>gR",
-		function()
-			package.loaded.gitsigns.reset_buffer()
-		end,
-		desc = "Hunk undo stage",
-	},
-	{
-		"<leader>ghp",
-		function()
-			package.loaded.gitsigns.preview_hunk()
-		end,
-		desc = "Hunk preview",
-	},
-	{
-		"<leader>ghj",
-		function()
-			package.loaded.gitsigns.next_hunk()
-		end,
-		desc = "Hunk next",
-	},
-	{
-		"<leader>ghk",
-		function()
-			package.loaded.gitsigns.prev_hunk()
-		end,
-		desc = "Hunk previous",
-	},
-	{ "<leader>gl", "<cmd>:Git log<CR>", desc = "Log" },
-	{ "<leader>gp", "<cmd>:Git push<CR>", desc = "Push" },
-	{ "<leader>gP", "<cmd>:Git pull<CR>", desc = "pull" },
-	{ "<leader>gr", "<cmd>:GRemove<CR>", desc = "Remove" },
-	-- v = { "<cmd>:GV<CR>", "View commits" },
-	-- V = { "<cmd>:GV!<CR>", "View buffer commits" },
-	{
-
-		mode = { "v" },
-		{
-			"<leader>gh",
-			function()
-				package.loaded.gitsigns.stage_hunk()
-			end,
-			desc = "Hunk stage",
-		},
-		{
-			"<leader>gr",
-			function()
-				package.loaded.gitsigns.reset_hunk()
-			end,
-			desc = "Hunk reset",
-		},
-	},
+	{ "<leader>gf", group = "Fugitive" },
+	{ "<leader>gh", group = "Hunk" },
+	{ "<leader>g/", "<cmd>:!git rev-parse --show-toplevel<CR>", desc = "Show toplevel", icon = "" },
+	{ "<leader>gf#", "<cmd>:Git blame<CR>", desc = "Blame list" },
+	{ "<leader>gf?", "<cmd>:Git<CR>", desc = "Status" },
+	{ "<leader>gfS", "<cmd>:Git add .", desc = "Stage all" },
+	{ "<leader>gfx", "<cmd>:GBrowse<CR>", desc = "Github" },
+	{ "<leader>gfc", "<cmd>:Git commit<CR>", desc = "Commit" },
+	{ "<leader>gfl", "<cmd>:Git log<CR>", desc = "Log" },
+	{ "<leader>gfp", "<cmd>:Git push<CR>", desc = "Push" },
+	{ "<leader>gfP", "<cmd>:Git pull<CR>", desc = "pull" },
+	{ "<leader>gfr", "<cmd>:GRemove<CR>", desc = "Remove" },
 })
 
 --------------------------------------------------------------------

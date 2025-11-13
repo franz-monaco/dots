@@ -49,14 +49,12 @@ return {
 		},
 		lazy = true,
 		cmd = { "Mason", "MasonUpdate", "MasonInstall", "MasonUninstallAll", "MasonLog" },
-		commit = "8024d64e1330b86044fed4c8494ef3dcd483a67c", -- 🔐
 		config = function() end,
 	},
 
 	-- ✓ mason-lspconfig bridges mason.nvim with the lspconfig plugin - making it easier to use both plugins together.
 	{
 		"williamboman/mason-lspconfig.nvim",
-		commit = "f54e3c11fc9ebfcfc27e696182b0295b071d0811", -- 🔐
 		lazy = true,
 		config = function()
 			require("mason").setup({
@@ -303,108 +301,143 @@ return {
 	-----------------------------------------------------------------------------
 	-- {{{ NULL LSP
 	-- ✓ Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
-	{
-
-		"nvimtools/none-ls.nvim",
-		commit = "db2a48b79cfcdab8baa5d3f37f21c78b6705c62e", -- 🔐
-		config = function()
-			local null_ls = require("null-ls")
-			local sources = {
-				null_ls.builtins.formatting.prettier.with({
-					filetypes = {
-						"javascript",
-						"javascriptreact",
-						"typescript",
-						"typescriptreact",
-						"css",
-						"scss",
-						"html",
-						"json",
-						"yaml",
-						"markdown",
-						"graphql",
-						"md",
-						"txt",
-					},
-				}),
-				-- null_ls.builtins.code_actions.shellcheck,
-				null_ls.builtins.formatting.stylua,
-				null_ls.builtins.formatting.shfmt,
-				null_ls.builtins.formatting.golines,
-			}
-			if pcall(require, "gitsigns") then
-				table.insert(sources, require("null-ls").builtins.code_actions.gitsigns)
-			end
-
-			-- print(vim.inspect(sources))
-
-			local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-			vim.g.autoFormat = true
-
-			require("null-ls").setup({
-				sources = sources,
-				on_attach = function(client, bufnr)
-					if client.supports_method("textDocument/formatting") then
-						vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-						vim.api.nvim_create_autocmd("BufWritePre", {
-							group = augroup,
-							buffer = bufnr,
-							callback = function()
-								if vim.g.autoFormat then
-									vim.lsp.buf.format({
-										bufnr = bufnr,
-										-- On Neovim v0.8+, when calling vim.lsp.buf.format as done in the examples above, you may want to filter the available formatters so that only null-ls receives the formatting request
-										filter = function(client)
-											return client.name == "null-ls"
-										end,
-										timeout_ms = 2000,
-									})
-								end
-							end,
-						})
-					end
-				end,
-			})
-		end,
-	},
+	-- {
+	--
+	-- 	"nvimtools/none-ls.nvim",
+	-- 	commit = "db2a48b79cfcdab8baa5d3f37f21c78b6705c62e", -- 🔐
+	-- 	config = function()
+	-- 		local null_ls = require("null-ls")
+	-- 		local sources = {
+	-- 			null_ls.builtins.formatting.prettier.with({
+	-- 				filetypes = {
+	-- 					"javascript",
+	-- 					"javascriptreact",
+	-- 					"typescript",
+	-- 					"typescriptreact",
+	-- 					"css",
+	-- 					"scss",
+	-- 					"html",
+	-- 					"json",
+	-- 					"yaml",
+	-- 					"markdown",
+	-- 					"graphql",
+	-- 					"md",
+	-- 					"txt",
+	-- 				},
+	-- 			}),
+	-- 			-- null_ls.builtins.code_actions.shellcheck,
+	-- 			null_ls.builtins.formatting.stylua,
+	-- 			null_ls.builtins.formatting.shfmt,
+	-- 			null_ls.builtins.formatting.golines,
+	-- 		}
+	-- 		if pcall(require, "gitsigns") then
+	-- 			table.insert(sources, require("null-ls").builtins.code_actions.gitsigns)
+	-- 		end
+	--
+	-- 		-- print(vim.inspect(sources))
+	--
+	-- 		local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+	-- 		vim.g.autoFormat = true
+	--
+	-- 		require("null-ls").setup({
+	-- 			sources = sources,
+	-- 			on_attach = function(client, bufnr)
+	-- 				if client.supports_method("textDocument/formatting") then
+	-- 					vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+	-- 					vim.api.nvim_create_autocmd("BufWritePre", {
+	-- 						group = augroup,
+	-- 						buffer = bufnr,
+	-- 						callback = function()
+	-- 							if vim.g.autoFormat then
+	-- 								vim.lsp.buf.format({
+	-- 									bufnr = bufnr,
+	-- 									-- On Neovim v0.8+, when calling vim.lsp.buf.format as done in the examples above, you may want to filter the available formatters so that only null-ls receives the formatting request
+	-- 									filter = function(client)
+	-- 										return client.name == "null-ls"
+	-- 									end,
+	-- 									timeout_ms = 2000,
+	-- 								})
+	-- 							end
+	-- 						end,
+	-- 					})
+	-- 				end
+	-- 			end,
+	-- 		})
+	-- 	end,
+	-- },
 	-- ✓ mason-null-ls bridges mason.nvim with the null-ls plugin - making it easier to use both plugins together.
+	-- {
+	-- 	"jay-babu/mason-null-ls.nvim",
+	-- 	commit = "de19726", -- 🔐
+	-- 	config = function()
+	-- 		require("mason-null-ls").setup({
+	-- 			-- A list of sources to install if they're not already installed.
+	-- 			-- This setting has no relation with the `automatic_installation` setting.
+	-- 			ensure_installed = {},
+	-- 			-- Run `require("null-ls").setup`.
+	-- 			-- Will automatically install masons tools based on selected sources in `null-ls`.
+	-- 			-- Can also be an exclusion list.
+	-- 			-- Example: `automatic_installation = { exclude = { "rust_analyzer", "solargraph" } }`
+	-- 			automatic_installation = true,
+	--
+	-- 			-- Whether sources that are installed in mason should be automatically set up in null-ls.
+	-- 			-- Removes the need to set up null-ls manually.
+	-- 			-- Can either be:
+	-- 			-- 	- false: Null-ls is not automatically registered.
+	-- 			-- 	- true: Null-ls is automatically registered.
+	-- 			-- 	- { types = { SOURCE_NAME = {TYPES} } }. Allows overriding default configuration.
+	-- 			-- 	Ex: { types = { eslint_d = {'formatting'} } }
+	-- 			automatic_setup = true,
+	--
+	-- 			handlers = {},
+	-- 		})
+	--
+	-- 		-- require("mason-null-ls").setup_handlers({
+	-- 		--   function(source_name, methods)
+	-- 		--     -- all sources with no handler get passed here
+	-- 		--
+	-- 		--     -- To keep the original functionality of `automatic_setup = true`,
+	-- 		--     -- please add the below.
+	-- 		--     require("mason-null-ls.automatic_setup")(source_name, methods)
+	-- 		--   end,
+	-- 		-- })
+	-- 		-----------------------------------------------------------------------------
+	-- 	end,
+	-- },
+	-- }}} NULL LSP
+
+	-- {{{ CONFORM
 	{
-		"jay-babu/mason-null-ls.nvim",
-		commit = "de19726", -- 🔐
+		"stevearc/conform.nvim",
+		event = { "BufReadPre", "BufNewFile" },
 		config = function()
-			require("mason-null-ls").setup({
-				-- A list of sources to install if they're not already installed.
-				-- This setting has no relation with the `automatic_installation` setting.
-				ensure_installed = {},
-				-- Run `require("null-ls").setup`.
-				-- Will automatically install masons tools based on selected sources in `null-ls`.
-				-- Can also be an exclusion list.
-				-- Example: `automatic_installation = { exclude = { "rust_analyzer", "solargraph" } }`
-				automatic_installation = true,
+			local conform = require("conform")
 
-				-- Whether sources that are installed in mason should be automatically set up in null-ls.
-				-- Removes the need to set up null-ls manually.
-				-- Can either be:
-				-- 	- false: Null-ls is not automatically registered.
-				-- 	- true: Null-ls is automatically registered.
-				-- 	- { types = { SOURCE_NAME = {TYPES} } }. Allows overriding default configuration.
-				-- 	Ex: { types = { eslint_d = {'formatting'} } }
-				automatic_setup = true,
-
-				handlers = {},
+			conform.setup({
+				formatters_by_ft = {
+					javascript = { "prettier" },
+					typescript = { "prettier" },
+					javascriptreact = { "prettier" },
+					typescriptreact = { "prettier" },
+					svelte = { "prettier" },
+					css = { "prettier" },
+					html = { "prettier" },
+					json = { "prettier" },
+					yaml = { "prettier" },
+					markdown = { "prettier" },
+					graphql = { "prettier" },
+					liquid = { "prettier" },
+					lua = { "stylua" },
+					python = { "isort", "black" },
+				},
+				format_on_save = {
+					lsp_fallback = true,
+					async = false,
+					timeout_ms = 3000,
+				},
 			})
-
-			-- require("mason-null-ls").setup_handlers({
-			--   function(source_name, methods)
-			--     -- all sources with no handler get passed here
-			--
-			--     -- To keep the original functionality of `automatic_setup = true`,
-			--     -- please add the below.
-			--     require("mason-null-ls.automatic_setup")(source_name, methods)
-			--   end,
-			-- })
-			-----------------------------------------------------------------------------
 		end,
 	},
-	-- }}} NULL LSP
+
+	-- }}} CONFORM
 }
