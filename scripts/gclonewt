@@ -15,7 +15,7 @@ set -euo pipefail
 repository=$(gh repo list --limit 100 --source | cut -f 1 | fzf-tmux -p)
 
 # clone directory
-git clone "git@github.com:$repository"
+git clone "git@github.com:$repository" --bare
 
 # get directory name for cloned repo
 directory=$(echo "$repository" | cut -d "/" -f 2)

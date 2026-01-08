@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+stty sane
+printf '\033k%s\033\\\033]2;%s\007' "basename "$SHELL"" "uname -n"
+tput reset
+tmux refresh
