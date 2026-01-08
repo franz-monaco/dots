@@ -161,6 +161,8 @@ alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && k
 #done
 
 alias clock='while true; do tput clear; date +" %H : %M : %S " | toilet -F gay -f smmono9; sleep 1; done'
+alias tn="(){tmux new -s $1}"
+alias e="exit"
 alias mv='mv -i'
 alias rm='rm -i'
 alias cp='cp -i'
@@ -177,9 +179,10 @@ alias grep='grep --color'
 alias dud='du -d 1 -h'
 alias duf='du -sh *'
 alias dir='ls -alrtGpFO'
-alias ll='eza --icons -labh --no-user --group-directories-first --git'      #long list
+alias ll='eza --icons -labh --group-directories-first --git'      #long list
 alias llt='eza --icons -labh --sort=mod --reverse --group-directories-first --git'   #sorted by date,show type,human readable
 alias llr='eza --icons -labhR --no-user --group-directories-first --git'   #recursive,show type,human readable
+alias lll='eza --icons -labh --no-user --group-directories-first --git --total-size'   #recursive,show type,human readable
 #alias fdir='find . -type d -name'
 #alias ffile='find . -type f -name'
 alias catimg='imgcat'
@@ -219,6 +222,7 @@ PATH=/usr/local/sbin:$PATH
 PATH=/usr/local/bin:$PATH
 PATH=~/.scripts:$PATH
 PATH=~/.ebcli-virtual-env/executables:$PATH
+PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 
 
 # fzf-tab tmux
@@ -238,8 +242,8 @@ export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SO
 export NNN_OPTS="H"
 export NNN_PLUG='f:finder;o:fzopen;d:diffs;x:preview-tui;y:nuke;'
 export NNN_FIFO="/tmp/nnn.fifo"
-export NNN_TRASH=0
-source ~/.dotfiles/.zshrc.nnn.quitcd
+export NNN_TRASH="trash"
+source ~/.zshrc.nnn.quitcd
 #export NNN_OPENER=~/.config/nnn/plugins/nuke
 alias n='n -eH'
 alias nnn='n -eH'
@@ -310,7 +314,7 @@ export FZF_DEFAULT_OPTS='--multi --reverse --no-height --extended --color=bg+:#1
 
 # --------------------------------------------------------------------------------------
 # Github authentication for read access
-export GITHUB_USER="fgprime"
+export GITHUB_USER=$(security find-generic-password -s "GITHUB_READ_TOKEN" | grep -E "acct" | cut -d'"' -f4)
 export GITHUB_TOKEN=$(security find-generic-password -a "$GITHUB_USER" -s "GITHUB_READ_TOKEN" -w)
 # --------------------------------------------------------------------------------------
 

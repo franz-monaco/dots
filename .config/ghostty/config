@@ -1,0 +1,13 @@
+theme=Gruvbox Dark Hard
+font-thicken
+font-family="MesloLGS Nerd Font Mono"
+font-size=16
+font-feature = -calt
+background-opacity=1
+link-url
+title="-"
+macos-icon = custom-style
+macos-icon-frame = aluminum
+macos-icon-ghost-color = #111111
+macos-icon-screen-color = #000000
+mouse-hide-while-typing
