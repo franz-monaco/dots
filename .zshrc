@@ -245,8 +245,8 @@ export NNN_FIFO="/tmp/nnn.fifo"
 export NNN_TRASH="trash"
 source ~/.zshrc.nnn.quitcd
 #export NNN_OPENER=~/.config/nnn/plugins/nuke
-alias n='n -eH'
-alias nnn='n -eH'
+alias n='nnn -eH'
+alias nnn='nnn -eH'
 # --------------------------------------------------------------------------------------
 
 export GEM_HOME="/Users/$USER/.gem"
