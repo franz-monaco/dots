@@ -1,16 +1,19 @@
-local noescape = require("modules.noescape")
+-- local noescape = require("modules.noescape")
+-- local expander = require("modules.expander")
 local streamdeck = require("modules.streamdeck")
 local moveToScreen = require("modules.moveToScreen")
 local moveToWindow = require("modules.moveToWindow")
-local expander = require("modules.expander")
+local windowSwitcher = require("modules.windowSwitcher")
 
 -- noescape.setup()
-streamdeck.setup()
+-- local expander = expander.setup()
+-- hs.loadSpoon("MouseFollowsFocus")
+-- spoon.MouseFollowsFocus:start()
+
+local sd = streamdeck.setup()
 moveToScreen.setup()
 moveToWindow.setup()
-
--- Configure text expander:
--- local expander = expander.setup()
+windowSwitcher.setup()
 
 hs.loadSpoon("Hammerflow")
 spoon.Hammerflow.registerFormat({
@@ -27,7 +30,7 @@ spoon.Hammerflow.registerFormat({
 	strokeWidth = 2,
 	textFont = "MesloLGS Nerd Font Mono",
 	textWeight = 100,
-	textSize = 20,
+	textSize = 22,
 })
 
 spoon.Hammerflow.loadFirstValidTomlFile({
@@ -35,3 +38,8 @@ spoon.Hammerflow.loadFirstValidTomlFile({
 })
 
 hs.loadSpoon("Hammerflow")
+
+-- hs.loadSpoon("RoundedCorners")
+-- spoon.RoundedCorners.radius=8
+-- local rc = spoon.RoundedCorners:start()
+

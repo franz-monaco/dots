@@ -9,122 +9,136 @@
 #################################################
 
 # settings
-leader_key = "f18"        # required, the leader key that starts the sequence
-leader_key_mods = ""      # optional, default "", not recommended - a dedicated leader key is better
+leader_key = "space"        # required, the leader key that starts the sequence
+leader_key_mods = "cmd"      # optional, default "", not recommended - a dedicated leader key is better
                              # supports cmd ctrl alt shift
 auto_reload = true        # optional, default true, reload when any file in this directory is saved
 toast_on_reload = false    # optional, default false, show a toast when the config is reloaded
 show_ui = true            # optional, default true, show the ui with your key maps
-key_maps_per_line = 3     # optional, default 5, number of key maps per line in the ui
+key_maps_per_line = 4     # optional, default 5, number of key maps per line in the ui
 
-# ideas
-
-# My Schedule
-# Switch Windows
 # JIRA Search
 # JIRA Me
 # Search Files
 # Eject All Disks
-# Search Emoji & Symboles
-# Toggle Mute
-# Toggle Bluetooth
-# ChatGPT
-#
-# Bluetooth
-# Datenschutz und Sicherheit
-# Displays
-# Netzwerk
-# Tastatur
-# Ton
-#
-# Window Management
-# History
 
-# set a key to open an app
-# t = "Terminal"
+q = ["esc", "Quit"]
 
-# Schedule
+e = ["raycast://extensions/raycast/emoji-symbols/search-emoji-symbols", "Emoji"]
 m = ["raycast://extensions/raycast/calendar/my-schedule", "Meetings"]
 
-# Emoji
-e = ["raycast://extensions/raycast/emoji-symbols/search-emoji-symbols", "Emoji"]
+[h]
+label = "Home"
+m = ["hs:hs.shortcuts.run('MeetingAction')", "Meeting Lights"]
+s = ["hs:hs.shortcuts.run('ScreenAction')", "Meeting Lights"]
+n = ["hs:hs.shortcuts.run('BackgroundNoise')", "Noise"]
 
-# or a url
+[g]
+label = "Go to App"
+a = ["Affinity Photo 2", "Affinity Photo"]
+c = ["Google Chrome", "Chrome"]
+e = ["Microsoft Excel", "Excel"]
+f = ["cmd: open ~/Documents", "Finder"]
+g = ["Ghostty", "Ghostty"]
+i = ["iTerm", "iTerm"]
+k = ["KeePassXC", "KeePass"]
+m = ["Obsidian", "Obsidian"]
+n = ["Notes", "Notes"]
+o = ["Microsoft Outlook", "Outlook"]
+p = ["Preview", "Preview"]
+r = ["raycast://raycast", "Raycast"]
+s = ["Safari", "Safari"]
+t = ["Microsoft Teams", "Teams"]
+w = ["Microsoft Word", "Word"]
+x = ["OmniFocus", "OmniFocus"]
+z = ["ZED", "ZED"]
 
+["/"]
+label = "Tools"
+c = ["Calculator", "Calculator"]
+p = ["Digital Color Meter", "Color Picker"]
+m = ["shortcut:cmd shift m", "Mute/Unmute"]
+s = ["shortcut:cmd shift 4", "Screenshot"]
+g = ["input:cmd:open 'https://google.com/search?q={input}'", "Google Search"]
+l = ["input:cmd:open 'https://maps.google.com/maps?q={input}'", "Maps Search"]
+r = [ "reload", "Reload config" ]
 
-# use an array to change the label in the popup
-# v = ["Visual Studio Code", "VS Code"]
+[n]
+label = "New"
+t = ["menu:Safari|Ablage>Neuer Tab","New Tab"]
 
-
-# create groups to nest actions
 [l]
-label = "[Links]" # the "label" key is reserved to change the label of the group
+label = "Links"
 g = "https://google.de"
-h = "https://github.com"
 
+[s]
+label = "macOS"
+p = ["cmd: open x-apple.systempreferences:com.apple.preference.security?General", "Privacy"]
+c = ["cmd: open x-apple.systempreferences:com.apple.preference.security?Privacy_Camera", "Privacy Camera"]
+m = ["cmd: open x-apple.systempreferences:com.apple.preference.security?Privacy_Microphone", "Security Microphone"] 
+b = ["cmd: open x-apple.systempreferences:com.apple.BluetoothSettings", "Bluetooth"]
+d = ["cmd: open x-apple.systempreferences:com.apple.Displays-Settings.extension", "Displays"]
+n = ["cmd: open x-apple.systempreferences:com.apple.Network-Settings.extension", "Network"]
+k = ["cmd: open x-apple.systempreferences:com.apple.preference.keyboard", "Keyboard"]
+s = ["cmd: open '/System/Applications/System Settings.app'", "Settings"]
+[s.a]
+label = "Audio"
+s = ["cmd: open x-apple.systempreferences:com.apple.preference.sound", "Settings"]
+i = ["hs:hs.audiodevice.findOutputByName('MacBook Pro-Lautsprecher'):setDefaultOutputDevice()", "Internal"]
+m = ["hs:hs.audiodevice.defaultOutputDevice():setMuted(not hs.audiodevice.defaultOutputDevice():muted())", "Mute toggle"]
 
-# groups can be nested too!
-[l.m]
-label = "[Me]"
-g = ["https://github.com", "My Github"]
-
-
-# raycast deep links are supported
 [r]
-label = "[Raycast]"
-c = ["raycast://extensions/raycast/raycast/confetti", "confetti"]
+label = "Raycast"
+r = ["raycast://raycast", "Raycast"]
+f = ["raycast://extensions/raycast/raycast-focus/toggle-focus-session", "Toggle Focus Session"]
+c = ["raycast://extensions/raycast/raycast/confetti", "Confetti"]
+l = ["raycast://extensions/raycast/system/lock-screen", "Lock"]
+s = ["raycast://extensions/raycast/system/sleep", "Sleep"]
+d = ["raycast://extensions/raycast/system/sleep-displays", "Sleep display"]
+h = ["raycast://extensions/raycast/system/hide-all-apps-except-frontmost", "Hide others"]
+u = ["raycast://extensions/raycast/system/unhide-all-hidden-apps", "Unhide all"]
+b = ["raycast://extensions/raycast/clipboard-history/clipboard-history", "Clipboard History"]
 
+[t]
+label = "Text"
+l = ["text:Liebe Grüße\n", "LG"]
+[t.m]
+label = "Mail"
+i= ["text:example@example.com", "Info"]
 
-# use prefixes for special actions
-# [p]
-# label = "[prefixes]"
-# t = "text:sam@saml.dev"       # types "sam@saml.dev"
-# z = "cmd:code ~/.zshrc"       # run any terminal command
-# x = "code: ~/.zshrc"          # open a file or directory in VS Code
-# s = "shortcut:cmd shift 4"    # trigger a keyboard shortcut
-# w = "menu:File>New Window"    # select menu items (frontmost app)
-# n = "menu:Safari|File>New Tab" # select menu items (specific app)
-# r = "reload"                  # reserved for reloading your hammerspoon config (helpful when auto_reload is false)
-# i = "input:https://google.com/search?q={input}" # capture input and insert it into any other action
- 
+[w]
+label = "Window"
+n=["hs:switchWindow()","Next window"]
+m = ["cmd:open -a 'Mission Control'", "Mission Control"]
 
+[o]
+label = "Open"
+d = ["cmd:open ~/Documents", "Documents"]
+w = ["cmd:open ~/Downloads", "Downloads"]
 
-# we have window management too!
-# [w]
-# label = "[window]"
-# h = "window:left-half"                    # use presets listed in the README
-# c = "window:center-half"                  # use presets listed in the README
-# s = ["window:.4,.3,.2,.4","small center"] # or use 4 percentages for x,y,width,height for custom placement - more details in README
+[w.s]
+label = "Size"
+h = ["window:left-half","Left half"]
+l = ["window:right-half","Right half"]
+c = ["window:center-half","Center half"]
+m = ["window:maximized","Maximized"]
+f = ["window:fullscreen","Fullscreen"]
+k = ["window:top-half","Top half"]
+j = ["window:bottom-half","Bottom half"]
+u = ["window:left-third","Left third"]
+i = ["window:center-third","Center third"]
+o = ["window:right-third","Right third"]
 
+[w.d]
+label = "Display"
+h=["hs:moveToScreenWest()","West"]
+l=["hs:moveToScreenEast()","East"]
+j=["hs:moveToScreenSouth()","South"]
+k=["hs:moveToScreenNorth()","North"]
 
-# or use raycast for window management if you prefer
-# [w.r]
-# label = "[raycast-window]"
-# h = ["raycast://extensions/raycast/window-management/left-half", "left half"]
-# l = ["raycast://extensions/raycast/window-management/right-half", "right half"]
-# c = ["raycast://extensions/raycast/window-management/center-half", "center half"]
-
-
-# this group is handy to copy over
-# for quick access to your config
-[z]
-label = "[Hammerspoon]"
-# c = "code: ~/.hammerspoon"
-r = "reload" # reserved for reloading your hammerspoon config (helpful when auto_reload is false)
-
-[q]
-label = "Quit"
-q = "esc"
-
-
-# glhf :) share your cool ideas with me on
-# twitter @saml_dev - <leader> l m t
-# bluesky @saml.dev - <leader> l m b
-# github saml-dev   - <leader> l m g
-
-
-# for advanced hammerspoon users, you can use
-# the hs: prefix as an escape hatch to run any
-# hammerspoon command you want.
-# [z]
-# z = "hs:hs.alert('Hello, world!')"
+[w.f]
+label = "Focus"
+h=["hs:moveToWindowWest()","West"]
+l=["hs:moveToWindowEast()","East"]
+j=["hs:moveToWindowSouth()","South"]
+k=["hs:moveToWindowNorth()","North"]

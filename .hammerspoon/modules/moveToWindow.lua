@@ -21,10 +21,10 @@ function M.setup()
 		win:focusWindowNorth(nil, true)
 	end
 
-	hs.hotkey.bind({ "cmd", "ctrl", "alt" }, "h", moveToWindowEast)
-	hs.hotkey.bind({ "cmd", "ctrl", "alt" }, "j", moveToWindowWest)
-	hs.hotkey.bind({ "cmd", "ctrl", "alt" }, "k", moveToWindowSouth)
-	hs.hotkey.bind({ "cmd", "ctrl", "alt" }, "l", moveToWindowNorth)
+	hs.hotkey.bind({ "cmd", "shift", "alt" }, "h", moveToWindowWest)
+	hs.hotkey.bind({ "cmd", "shift", "alt" }, "j", moveToWindowSouth)
+	hs.hotkey.bind({ "cmd", "shift", "alt" }, "k", moveToWindowNorth)
+	hs.hotkey.bind({ "cmd", "shift", "alt" }, "l", moveToWindowEast)
 end
 
 return M
